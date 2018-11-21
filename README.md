@@ -8,10 +8,10 @@
 En el ```application.properties``` se define:
 
 ```
-spring.data.mongodb.database=jsa_mongodb
+spring.data.mongodb.database=products_mongodb
 spring.data.mongodb.port=27017
 ```
-Por lo que se debe contar con el servicio de mongoDB con los parámetros por defecto. [Centro de descargar de MongoDB](https://www.mongodb.com/download-center/community)
+Por lo que se debe contar con el servicio de mongoDB con los parámetros por defecto. [Centro de descargar de MongoDB](https://www.mongodb.com/download-center/community), Se creará la coleccion products_mongodb en cuando se agreguen productos.
 
 #### Logging: Logback
 La aplicación deja una traza en ```C:/dev/products/log/```, en caso de no existir, este directorio se creará al iniciar la aplicación.
