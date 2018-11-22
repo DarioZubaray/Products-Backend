@@ -1,11 +1,14 @@
 package com.zubaray.api.products.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +27,13 @@ public class ProductController {
     ProductRepository repository;
 
     @GetMapping("/findAll")
-    public List<Product> findAll() {
+    public List<Product> findAll(Integer page, Integer size) {
         logger.info("Get all products...");
-        List<Product> products = new ArrayList<>();
-        repository.findAll().forEach(products::add);
-        return products;
+        page = page != null ? page : 0;
+        size = size != null ? size : 10;
+        Pageable pageable = PageRequest.of(page, size, Sort.unsorted());
+        Page<Product> pageProduct = repository.findAll(pageable);
+        return pageProduct.getContent();
     }
 
     @PostMapping("/create")
