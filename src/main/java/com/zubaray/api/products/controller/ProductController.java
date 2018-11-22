@@ -16,24 +16,24 @@ import com.zubaray.api.products.model.Product;
 import com.zubaray.api.products.repository.ProductRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductRepository repository;
 
-    @GetMapping("/products")
-    public List<Product> getAllProducts() {
+    @GetMapping("/findAll")
+    public List<Product> findAll() {
         logger.info("Get all products...");
         List<Product> products = new ArrayList<>();
         repository.findAll().forEach(products::add);
         return products;
     }
 
-    @PostMapping("/product/create")
-    public Product postCustomer(@RequestBody Product product) {
-        logger.info("Post products...");
+    @PostMapping("/create")
+    public Product createProduct(@RequestBody Product product) {
+        logger.info("Creating a new products...");
         logger.info("{}", product);
         return repository.save(product);
     }
