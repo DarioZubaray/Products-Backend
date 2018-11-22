@@ -27,13 +27,12 @@ public class ProductController {
     ProductRepository repository;
 
     @GetMapping("/findAll")
-    public List<Product> findAll(Integer page, Integer size) {
+    public Page<Product> findAll(Integer page, Integer size) {
         logger.info("Get all products...");
         page = page != null ? page : 0;
         size = size != null ? size : 10;
         Pageable pageable = PageRequest.of(page, size, Sort.unsorted());
-        Page<Product> pageProduct = repository.findAll(pageable);
-        return pageProduct.getContent();
+        return repository.findAll(pageable);
     }
 
     @PostMapping("/create")
