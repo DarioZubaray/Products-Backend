@@ -35,6 +35,10 @@ public class ProductController {
     public Product createProduct(@RequestBody Product product) {
         logger.info("Creating a new products...");
         logger.info("{}", product);
-        return repository.save(product);
+        if(product.isValid()) {
+            return repository.save(product);
+        } else {
+            return product;
+        }
     }
 }

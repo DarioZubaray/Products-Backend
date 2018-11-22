@@ -24,6 +24,19 @@ public class Product {
         this.categoryId = categoryId;
     }
 
+    public boolean isValid() {
+        if(this.name == null || this.name.isEmpty()){
+            return false;
+        }
+        if(this.price == null || this.price.isNaN()) {
+            return false;
+        }
+        if(this.brand == null || this.brand.isEmpty()) {
+            return false;
+        }
+        return this.categoryId != null;
+    }
+
     public String getId() {
         return id;
     }
